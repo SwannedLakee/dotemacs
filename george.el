@@ -1,8 +1,8 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+			 ("org" . "https://orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -23,6 +23,8 @@
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0))
+
+  (fset 'yes-or-no-p 'y-or-n-p)
 
 (setq inhibit-startup-screen t)
     (setq initial-scratch-message nil)
