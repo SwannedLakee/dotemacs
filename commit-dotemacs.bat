@@ -1,1 +1,3 @@
-C:\Users\George\.emacs.d git add -A && git commit -m "committing"
+git add -A && git commit -m "Update"
+git push
+pause
