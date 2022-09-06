@@ -1,1 +1,1 @@
-git add -A && git commit -m "committing"
+C:\Users\George\.emacs.d git add -A && git commit -m "committing"
