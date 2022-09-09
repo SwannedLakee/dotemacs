@@ -1,78 +1,80 @@
 (require 'package)
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			   ("org" . "https://orgmode.org/elpa/")
+			   ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(package-initialize)
-(unless package-archive-contents
- (package-refresh-contents))
+  (package-initialize)
+  (unless package-archive-contents
+   (package-refresh-contents))
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-   (package-install 'use-package))
+  ;; Initialize use-package on non-Linux platforms
+  (unless (package-installed-p 'use-package)
+     (package-install 'use-package))
 
-(require 'use-package)
-(setq use-package-always-ensure t)
+  (require 'use-package)
+  (setq use-package-always-ensure t)
 
-(use-package command-log-mode)
+  (use-package command-log-mode)
 
 
-  (use-package which-key
-  :init (which-key-mode)
-  :diminish which-key-mode
-  :config
-  (setq which-key-idle-delay 0))
+    (use-package which-key
+    :init (which-key-mode)
+    :diminish which-key-mode
+    :config
+    (setq which-key-idle-delay 0))
 
+(setq split-height-threshold nil) ;split vertically by default
+(setq split-width-threshold 160)
   (fset 'yes-or-no-p 'y-or-n-p)
 
 (setq inhibit-startup-screen t)
-    (setq initial-scratch-message nil)
-    (menu-bar-mode -1)
-    (tool-bar-mode -1)
-    (tooltip-mode -1)
-    (set-fringe-mode 5)        ; Give some breathing room
-    (scroll-bar-mode -1)
-    (xclip-mode 1)
+      (setq initial-scratch-message nil)
+      (menu-bar-mode -1)
+      (tool-bar-mode -1)
+      (tooltip-mode -1)
+      (set-fringe-mode 5)        ; Give some breathing room
+      (scroll-bar-mode -1)
+      (xclip-mode 1)
+;;(defalias 'ivy-switch-buffer 'ibuffer); make ibuffer default
+    ;; (use-package desktop
+    ;;   :defer 2
+    ;;   :config
+    ;;   (setq desktop-path (list my-savefile-dir))
+    ;;   (setq desktop-dirname my-savefile-dir)
+    ;;   (setq desktop-restore-eager 5)
+    ;;   (setq desktop-load-locked-desktop t)
+    ;;   (desktop-save-mode +1))
 
-  ;; (use-package desktop
-  ;;   :defer 2
-  ;;   :config
-  ;;   (setq desktop-path (list my-savefile-dir))
-  ;;   (setq desktop-dirname my-savefile-dir)
-  ;;   (setq desktop-restore-eager 5)
-  ;;   (setq desktop-load-locked-desktop t)
-  ;;   (desktop-save-mode +1))
+      (add-to-list 'default-frame-alist '(fullscreen . maximized))
+      (load-theme 'modus-vivendi)
+      (use-package all-the-icons)
+      (delete-selection-mode t)
+      (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+      (find-file "~/.emacs.d/george.org") 
 
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
-    (load-theme 'modus-vivendi)
-    (use-package all-the-icons)
-    (delete-selection-mode t)
-    (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
-    (find-file "~/.emacs.d/george.org") 
-
-    ;;(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-    (add-to-list 'load-path "~/.emacs.d/lisp/")
-
-
-(require 'xah-fly-keys)
-
-;; specify a layout
-(xah-fly-keys-set-layout "colemak-mod-dh-new")
-(define-key xah-fly-command-map (kbd "e") 'previous-line)
-(define-key xah-fly-command-map (kbd "n") 'next-line)
-
-(xah-fly-keys 1)
-
-   (define-key key-translation-map (kbd "ESC") (kbd "C-g")) 
+      ;;(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+      (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 
-;(defun x-activate-cmd-mode-n-keyboard-quit ()
- ; "DOCSTRING"
-  ;(interactive)
-  ;(xah-fly-command-mode-activate)
-  ;(keyboard-quit))
-;(global-set-key "ESC" 'x-activate-cmd-mode-n-keyboard-quit)
+  (require 'xah-fly-keys)
+
+  ;; specify a layout
+  (xah-fly-keys-set-layout "colemak-mod-dh")
+  (define-key xah-fly-command-map (kbd "e") 'previous-line)
+  (define-key xah-fly-command-map (kbd "n") 'next-line)
+
+  (xah-fly-keys 1)
+
+     (define-key key-translation-map (kbd "ESC") (kbd "C-g")) 
+
+
+  ;; (defun x-activate-cmd-mode-n-keyboard-quit ()
+   ;; "DOCSTRING"
+    ;; (interactive)
+    ;; (xah-fly-command-mode-activate)
+    ;; (keyboard-quit))
+  ;; (global-set-key "ESC" 'x-activate-cmd-mode-n-keyboard-quit)
 
 (use-package magit
   :ensure t)
