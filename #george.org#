@@ -6,9 +6,9 @@
       (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			       ("org" . "https://orgmode.org/elpa/")
 			       ("elpa" . "https://elpa.gnu.org/packages/")))
-
+ 45BC by Roman statesman, lawyer, scholar, and philosopher, Marcus Tullius Cicero. The text is titled "de Finibus Bonorum et Malorum" which means "The Extremes of Good and Evil". The most common form of Lorem ipsum is the following:
       (package-initialize)
-      (unless package-archive-contents
+      (unless package-archive-contents 45BC by Roman statesman, lawyer, scholar, and philosopher, Marcus Tullius Cicero. The text is titled "de Finibus Bonorum et Malorum" which means "The Extremes of Good and Evil". The most common form of Lorem ipsum is the following:
        (package-refresh-contents))
 
       ;; Initialize use-package on non-Linux platforms
@@ -30,25 +30,11 @@
 	:config
 	(setq which-key-idle-delay 0))
 
+   (define-key xah-fly-key-map [remap xah-beginning-of-line-or-block] #'isearch-forward)
+   (define-key xah-fly-key-map [remap isearch-forward] #'xah-beginning-of-line-or-block)
   (add-to-list 'load-path "~/.emacs.d/lisp/")
 
   (require 'xah-fly-keys)
-
-  ;; specify a layout
-  (xah-fly-keys-set-layout "colemak-dhm-angle")
-
-  (xah-fly-keys 1)
-
-	    (key-chord-define-global "lu" 'elisp-code-block)
-	    (key-chord-define-global "st" 'xah-fly-insert-mode-activate)
-	    (key-chord-define-global "en" 'xah-fly-command-mode-activate)
-
-  ;  (define-key xah-fly-key-map [remap xah-beginning-of-line-or-block] #'isearch-forward)
-   ; (define-key xah-fly-key-map [remap isearch-forward] #'xah-beginning-of-line-or-block)
-
-   ; (define-key xah-fly-key-map [remap end-of-buffer] #'beginning-of-buffer)
-    ;(define-key xah-fly-key-map [remap beginning-of-buffer] #'end-of-buffer)
-
 
     #+END_SRC
 * Startup
