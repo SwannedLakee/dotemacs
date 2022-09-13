@@ -1,89 +1,90 @@
 (require 'package)
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+      (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			       ("org" . "https://orgmode.org/elpa/")
+			       ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(package-initialize)
-(unless package-archive-contents
- (package-refresh-contents))
+      (package-initialize)
+      (unless package-archive-contents
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-   (package-install 'use-package))
+(package-refresh-contents))
 
-(require 'use-package)
-(setq use-package-always-ensure t)
+      ;; Initialize use-package on non-Linux platforms
+      (unless (package-installed-p 'use-package)
+	 (package-install 'use-package))
 
-(use-package command-log-mode)
+      (require 'use-package)
+      (setq use-package-always-ensure t)
+
+      (use-package command-log-mode)
 
 (use-package which-key
-      :init (which-key-mode)
-      :diminish which-key-mode
-      :config
-      (setq which-key-idle-delay 0))
+	:init (which-key-mode)
+	:diminish which-key-mode
+	:config
+	(setq which-key-idle-delay 0))
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(require 'xah-fly-keys)
+  (require 'xah-fly-keys)
 
-;; specify a layout
-(xah-fly-keys-set-layout "colemak-dhm-angle")
+  ;; specify a layout
+  (xah-fly-keys-set-layout "colemak-dhm")
 
-(xah-fly-keys 1)
+  (xah-fly-keys 1)
 
-	  (key-chord-define-global "lu" 'elisp-code-block)
-	  (key-chord-define-global "st" 'xah-fly-insert-mode-activate)
-	  (key-chord-define-global "en" 'xah-fly-command-mode-activate)
+	    (key-chord-define-global "lu" 'elisp-code-block)
+	    (key-chord-define-global "st" 'xah-fly-insert-mode-activate)
+	    (key-chord-define-global "en" 'xah-fly-command-mode-activate)
 
-;  (define-key xah-fly-key-map [remap xah-beginning-of-line-or-block] #'isearch-forward)
- ; (define-key xah-fly-key-map [remap isearch-forward] #'xah-beginning-of-line-or-block)
-
- ; (define-key xah-fly-key-map [remap end-of-buffer] #'beginning-of-buffer)
-  ;(define-key xah-fly-key-map [remap beginning-of-buffer] #'end-of-buffer)
+  (abbrev-mode 1)
+`xah-elisp-mode'
+ (autoload 'xah-elisp-mode "xah-elisp-mode" "xah emacs lisp major mode." t)
 
 (setq inhibit-startup-screen t)
-	(setq initial-scratch-message nil)
-	(menu-bar-mode -1)
-	(tool-bar-mode -1)
-	(tooltip-mode -1)
-	(set-fringe-mode 5)
-	(scroll-bar-mode -1)
-	(fset 'yes-or-no-p 'y-or-n-p)
-	(xclip-mode 1)
-  ;;(defalias 'ivy-switch-buffer 'ibuffer); make ibuffer default
-      ;; (use-package desktop
-      ;;   :defer 2
-      ;;   :config
-      ;;   (setq desktop-path (list my-savefile-dir))
-      ;;   (setq desktop-dirname my-savefile-dir)
-      ;;   (setq desktop-restore-eager 5)
-      ;;   (setq desktop-load-locked-desktop t)
-      ;;   (desktop-save-mode +1))
+	    (setq initial-scratch-message nil)
+	    (menu-bar-mode -1)
+	    (tool-bar-mode -1)
+	    (tooltip-mode -1)
+	    (set-fringe-mode 5)
+	    (scroll-bar-mode -1)
+	    (fset 'yes-or-no-p 'y-or-n-p)
+	    (xclip-mode 1)
+      ;;(defalias 'ivy-switch-buffer 'ibuffer); make ibuffer default
+	  ;; (use-package desktop
+	  ;;   :defer 2
+	  ;;   :config
+	  ;;   (setq desktop-path (list my-savefile-dir))
+	  ;;   (setq desktop-dirname my-savefile-dir)
+	  ;;   (setq desktop-restore-eager 5)
+	  ;;   (setq desktop-load-locked-desktop t)
+	  ;;   (desktop-save-mode +1))
 
-(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+    (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+    (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
-	(add-to-list 'default-frame-alist '(fullscreen . maximized))
-	(load-theme 'modus-vivendi)
-	(use-package all-the-icons)
-	(delete-selection-mode t)
-	(define-key global-map (kbd "<f5>") #'modus-themes-toggle)
-	(find-file "~/.emacs.d/george.org") 
+;  (global-set-key (kbd "C-h-a") 'apropos-command) ;dnw
+  
+	    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+	    (load-theme 'modus-vivendi)
+	    (use-package all-the-icons)
+	    (delete-selection-mode t)
+	    (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+	    (find-file "~/.emacs.d/george.org") 
 
-	;;(global-set-key;; specify a layout
-    (define-key xah-fly-command-map (kbd "e") 'previous-line)
-    (define-key xah-fly-command-map (kbd "n") 'next-line)
+	;; (define-key xah-fly-command-map (kbd "e") 'previous-line)
+	;; (define-key xah-fly-command-map (kbd "n") 'next-line)
 
-       (define-key key-translation-map (kbd "ESC") (kbd "C-g")) 
+   (global-set-key (kbd "<f1>") 'check-parens)
 
+  (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
-    ;; (defun x-activate-cmd-mode-n-keyboard-quit ()
-     ;; "DOCSTRING"
-      ;; (interactive)
-      ;; (xah-fly-command-mode-activate)
-      ;; (keyboard-quit))
-    ;; (global-set-key "ESC" 'x-activate-cmd-mode-n-keyboard-quit)
+	;; (defun x-activate-cmd-mode-n-keyboard-quit ()
+	 ;; "DOCSTRING"
+	  ;; (interactive)
+	  ;; (xah-fly-command-mode-activate)
+	  ;; (keyboard-quit))
+	;; (global-set-key "ESC" 'x-activate-cmd-mode-n-keyboard-quit)
 
 ;; Using garbage magic hack.
  (use-package gcmh
@@ -102,10 +103,16 @@
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
-;; Silence compiler warnings as they can be pretty disruptive (setq comp-async-report-warnings-errors nil)
+;; Silence compiler warnings as they can be pretty disruptive (setqcomp-async-report-warnings-errors nil)
+
+;; (use-package magit			
+      ;; :ensure t)
+  ;; (setq magit-display-buffer-function 'switch-to-buffer)
 
 (use-package magit
-  :ensure t)
+  :commands magit-status
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package counsel
       :after ivy

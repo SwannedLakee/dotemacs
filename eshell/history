@@ -1,0 +1,23 @@
+dir
+ls
+cd
+ls
+build-site.cmd 
+build-site.cmd 
+.build-site.cmd 
+./build-site.cmd 
+./build-site.cmd 
+./build-site.cmd 
+./build-site.cmd 
+./build-site.cmd 
+./build-site.cmd 
+./build-site.cmd 
+./build-site.cmd 
+clr
+cl
+c
+clear
+emacs -Q --script build-site.el
+ls
+build-site.cmd 
+build.cmd 

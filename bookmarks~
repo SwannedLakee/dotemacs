@@ -2,17 +2,7 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Emacs questions.org"
- (filename . "~/Emacs questions.org")
- (front-context-string)
- (rear-context-string . "ah Elisp Mode\n- ")
- (position . 196))
-("randomtxt.txt"
- (filename . "~/randomtxt.txt")
- (front-context-string)
- (rear-context-string . "2 randomtxt.txt\n")
- (position . 148))
-("george.org"
+(("george.org"
  (filename . "~/.emacs.d/george.org")
  (front-context-string . "	    (add-to-lis")
  (rear-context-string . "ommand) ;dnw\n  \n")
