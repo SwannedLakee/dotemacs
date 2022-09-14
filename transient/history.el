@@ -1,4 +1,5 @@
-((magit-commit nil
+((magit-branch nil)
+ (magit-commit nil
 	       ("--all")
 	       ("--all" "--verbose"))
  (magit-diff

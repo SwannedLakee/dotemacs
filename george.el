@@ -65,7 +65,7 @@
 
 ;  (global-set-key (kbd "C-h-a") 'apropos-command) ;dnw
   
-	    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+ 	    (add-to-list 'default-frame-alist '(fullscreen . maximized))
 	    (load-theme 'modus-vivendi)
 	    (use-package all-the-icons)
 	    (delete-selection-mode t)
