@@ -18,33 +18,37 @@
 
       (use-package command-log-mode)
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+   (autoload 'xah-elisp-mode "xah-elisp-mode" "xah emacs lisp major mode." t)
+   (xah-elisp-mode)
+
 (use-package which-key
-	:init (which-key-mode)
-	:diminish which-key-mode
-	:config
-	(setq which-key-idle-delay 0))
+	 :init (which-key-mode)
+	 :diminish which-key-mode
+	 :config
+	 (setq which-key-idle-delay 0))
 
-  (add-to-list 'load-path "~/.emacs.d/lisp/")
+(set-face-foreground 'mode-line "gray")
+(set-face-background 'mode-line "black")
+;; (set-face-background 'mode-line-inactive "03fce7")
+;; (set-face-attribute 'region nil :background "#f7f5f5")
+(set-face-foreground 'line-number "#565759")
+(set-face-background 'line-number "#000000")
 
-  (require 'xah-fly-keys)
+   (require 'xah-fly-keys)
+   (xah-fly-keys-set-layout "colemak-dhm")
+   (xah-fly-keys 1)
 
-  ;; specify a layout
-  (xah-fly-keys-set-layout "colemak-dhm")
+	     (key-chord-define-global "lu" 'elisp-code-block)
+	     (key-chord-define-global "st" 'xah-fly-insert-mode-activate)
+	     (key-chord-define-global "en" 'xah-fly-command-mode-activate)
 
-  (xah-fly-keys 1)
-
-	    (key-chord-define-global "lu" 'elisp-code-block)
-	    (key-chord-define-global "st" 'xah-fly-insert-mode-activate)
-	    (key-chord-define-global "en" 'xah-fly-command-mode-activate)
-
-  (abbrev-mode 1)
-`xah-elisp-mode'
- (autoload 'xah-elisp-mode "xah-elisp-mode" "xah emacs lisp major mode." t)
+   (abbrev-mode 1)
 
 (setq inhibit-startup-screen t)
 	    (setq initial-scratch-message nil)
 	    (menu-bar-mode -1)
-	    (tool-bar-mode -1)
+	    (tool-bar-mode -1) 
 	    (tooltip-mode -1)
 	    (set-fringe-mode 5)
 	    (scroll-bar-mode -1)

@@ -1,1 +1,1 @@
-("~/git-can-delme/" "~/.emacs.d/" "~/gitTestMagit/" "~/magitTest/")
+("~/.emacs.d/" "~/git-can-delme/" "~/gitTestMagit/" "~/magitTest/")
