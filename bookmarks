@@ -14,9 +14,9 @@
  (position . 196))
 ("randomtxt.txt"
  (filename . "~/randomtxt.txt")
- (front-context-string)
- (rear-context-string . "2 randomtxt.txt\n")
- (position . 148))
+ (front-context-string . "?\n\nThis tool was")
+ (rear-context-string . "n I do with this")
+ (position . 5501))
 ("george.org"
  (filename . "~/.emacs.d/george.org")
  (front-context-string . "	    (add-to-lis")
