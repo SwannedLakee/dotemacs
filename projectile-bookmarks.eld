@@ -1,1 +1,1 @@
-("~/.emacs.default/" "~/delmenow/" "~/.emacs.d/" "~/git-can-delme/" "~/gitTestMagit/" "~/magitTest/")
+("~/delmenow/" "~/.emacs.d/" "~/git-can-delme/" "~/gitTestMagit/" "~/magitTest/")

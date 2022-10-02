@@ -10,7 +10,7 @@
 
    (package-refresh-contents))
 
- (add-to-list 'load-path "~/.emacs.default/lisp")
+ (add-to-list 'load-path "~/.emacs.d/lisp")
 
  ;; Initialize use-package on non-Linux platforms
  (unless (package-installed-p 'use-package)
@@ -219,7 +219,7 @@
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;theme
-(add-to-list 'load-path "~/.emacs.default/modus-themes")
+(add-to-list 'load-path "~/.emacs.d/modus-themes")
 
 
 ;;; For the built-in themes which cannot use `require':
@@ -258,7 +258,7 @@
   (use-package all-the-icons)
   (delete-selection-mode t)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
-  (find-file "~/.emacs.default/george.org")
+  (find-file "~/.emacs.d/george.org")
 
   ;; (define-key xah-fly-command-map (kbd "e") 'previous-line)
   ;; (define-key xah-fly-command-map (kbd "n") 'next-line)
