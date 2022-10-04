@@ -1,170 +1,172 @@
 (require 'package)
 
- (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			  ("org" . "https://orgmode.org/elpa/")
-			  ("elpa" . "https://elpa.gnu.org/packages/")))
+    (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			     ("org" . "https://orgmode.org/elpa/")
+			     ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(global-set-key (kbd "C-s") 'swiper)
- (package-initialize)
- (unless package-archive-contents
+   (global-set-key (kbd "C-s") 'swiper)
+    (package-initialize)
+    (unless package-archive-contents
+ (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))     
+      (package-refresh-contents))
 
-   (package-refresh-contents))
+    (add-to-list 'load-path "~/.emacs.d/lisp")
 
- (add-to-list 'load-path "~/.emacs.d/lisp")
+    ;; Initialize use-package on non-Linux platforms
+    (unless (package-installed-p 'use-package)
+      (package-install 'use-package))
 
- ;; Initialize use-package on non-Linux platforms
- (unless (package-installed-p 'use-package)
-   (package-install 'use-package))
+    (require 'use-package)
+    (setq use-package-always-ensure t)
 
- (require 'use-package)
- (setq use-package-always-ensure t)
+    (use-package command-log-mode)
 
- (use-package command-log-mode)
+;; M-S-LEFT (org-table-delete-column)
 
- (setq org-agenda-files
-       '("~/Projects/Code/OrgFiles/Tasks.org"
-	 "~/Projects/Code/OrgFiles/Birthdays.org"))
- (setq org-agenda-start-with-log-mode t)
- (setq org-log-done 'time)
- (setq org-log-into-drawer t)
+    (setq org-agenda-files
+	  '("~/Projects/Code/OrgFiles/Tasks.org"
+	    "~/notes.org"
+	    "~/Projects/Code/OrgFiles/Birthdays.org"))
+    (setq org-agenda-start-with-log-mode t)
+    (setq org-log-done 'time)
+    (setq org-log-into-drawer t)
 
- (setq org-todo-keywords
-       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-	 (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+    (setq org-todo-keywords
+	  '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+	    (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
-					 ;dnw
- (defun add-org-asterix ()
-   "DOCSTRING"
-   (if(eq 0 (current-columm))
-       (local-set-key (kbd "C-p") #'(insert "* "))))
+   ;; 					 ;dnw
+   ;;  (defun add-org-asterix ()
+   ;;    "DOCSTRING"
+   ;;    (if(eq 0 (current-columm))
+   ;;        (local-set-key (kbd "C-p") #'(insert "* "))))
 
-;; (local-set-key (kbd "C-p") #'(insert "dsjfh"))
+   ;; ;
+					   ; (local-set-key (kbd "C-p") #'(insert "dsjfh"))
 
- (add-hook 'org-mode-hook 'add-org-asterix)
+    ;; (add-hook 'org-mode-hook 'add-org-asterix)
 
- (add-hook 'HOOK 'FUNCTION)
- (toggle-word-wrap t)
- (global-set-key (kbd "C-d") 'pop-global-mark)
- (define-key minibuffer-local-map (kbd "M-o") 'ivy-dispatching-done)
+    (toggle-word-wrap t)
+    (global-set-key (kbd "C-d") 'pop-global-mark)
+    (define-key minibuffer-local-map (kbd "M-o") 'ivy-dispatching-done)
 
- ;; Example configuration for Consult
- (use-package consult
-   ;; Replace bindings. Lazily loaded due by `use-package'.
-   :bind (;; C-c bindings (mode-specific-map)
-	  ("C-c h" . consult-history)
-	  ("C-c m" . consult-mode-command)
-	  ("C-c k" . consult-kmacro)
-	  ;; C-x bindings (ctl-x-map)
-	  ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-	  ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-	  ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-	  ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-	  ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-	  ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-	  ;; Custom M-# bindings for fast register access
-	  ("M-#" . consult-register-load)
-	  ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-	  ("C-M-#" . consult-register)
-	  ;; Other custom bindings
-	  ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-	  ("<help> a" . consult-apropos)            ;; orig. apropos-command
+    ;; Example configuration for Consult
+    (use-package consult
+      ;; Replace bindings. Lazily loaded due by `use-package'.
+      :bind (;; C-c bindings (mode-specific-map)
+	     ("C-c h" . consult-history)
+	     ("C-c m" . consult-mode-command)
+	     ("C-c k" . consult-kmacro)
+	     ;; C-x bindings (ctl-x-map)
+	     ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+	     ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+	     ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+	     ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+	     ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+	     ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+	     ;; Custom M-# bindings for fast register access
+	     ("M-#" . consult-register-load)
+	     ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+	     ("C-M-#" . consult-register)
+	     ;; Other custom bindings
+	     ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+	     ("<help> a" . consult-apropos)            ;; orig. apropos-command
 
-	  ;; M-g bindings (goto-map)
-	  ("M-g e" . consult-compile-error)
-	  ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-	  ("M-g g" . consult-goto-line)             ;; orig. goto-line
-	  ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-	  ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-	  ("M-g m" . consult-mark)
+	     ;; M-g bindings (goto-map)
+	     ("M-g e" . consult-compile-error)
+	     ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+	     ("M-g g" . consult-goto-line)             ;; orig. goto-line
+	     ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+	     ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+	     ("M-g m" . consult-mark)
 
-	  ("M-g k" . consult-global-mark)
-	  ("M-g i" . consult-imenu)
-	  ("M-g I" . consult-imenu-multi)
-	  ;; M-s bindings (search-map)
-	  ("M-s d" . consult-find)
-	  ("M-s D" . consult-locate)
-	  ("M-s g" . consult-grep)
-	  ("M-s G" . consult-git-grep)
-	  ("M-s r" . consult-ripgrep)
-	  ("M-s l" . consult-line)
-	  ("M-s L" . consult-line-multi)
-	  ("M-s m" . consult-multi-occur)
-	  ("M-s k" . consult-keep-lines)
-	  ("M-s u" . consult-focus-lines)
-	  ;; Isearch integration
-	  ("M-s e" . consult-isearch-history)
-	  :map isearch-mode-map
-	  ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-	  ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-	  ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-	  ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-	  ;; Minibuffer history
-	  :map minibuffer-local-map
-	  ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-	  ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+	     ("M-g k" . consult-global-mark)
+	     ("M-g i" . consult-imenu)
+	     ("M-g I" . consult-imenu-multi)
+	     ;; M-s bindings (search-map)
+	     ("M-s d" . consult-find)
+	     ("M-s D" . consult-locate)
+	     ("M-s g" . consult-grep)
+	     ("M-s G" . consult-git-grep)
+	     ("M-s r" . consult-ripgrep)
+	     ("M-s l" . consult-line)
+	     ("M-s L" . consult-line-multi)
+	     ("M-s m" . consult-multi-occur)
+	     ("M-s k" . consult-keep-lines)
+	     ("M-s u" . consult-focus-lines)
+	     ;; Isearch integration
+	     ("M-s e" . consult-isearch-history)
+	     :map isearch-mode-map
+	     ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+	     ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+	     ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+	     ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+	     ;; Minibuffer history
+	     :map minibuffer-local-map
+	     ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+	     ("M-r" . consult-history))                ;; orig. previous-matching-history-element
 
-   ;; Enable automatic preview at point in the *Completions* buffer. This is
-   ;; relevant when you use the default completion UI.
-   :hook (completion-list-mode . consult-preview-at-point-mode)
+      ;; Enable automatic preview at point in the *Completions* buffer. This is
+      ;; relevant when you use the default completion UI.
+      :hook (completion-list-mode . consult-preview-at-point-mode)
 
-   ;; The :init configuration is always executed (Not lazy)
-   :init
+      ;; The :init configuration is always executed (Not lazy)
+      :init
 
-   ;; Optionally configure the register formatting. This improves the register
-   ;; preview for `consult-register', `consult-register-load',
-   ;; `consult-register-store' and the Emacs built-ins.
-   (setq register-preview-delay 0.5
-	 register-preview-function #'consult-register-format)
+      ;; Optionally configure the register formatting. This improves the register
+      ;; preview for `consult-register', `consult-register-load',
+      ;; `consult-register-store' and the Emacs built-ins.
+      (setq register-preview-delay 0.5
+	    register-preview-function #'consult-register-format)
 
-   ;; Optionally tweak the register preview window.
-   ;; This adds thin lines, sorting and hides the mode line of the window.
-   (advice-add #'register-preview :override #'consult-register-window)
+      ;; Optionally tweak the register preview window.
+      ;; This adds thin lines, sorting and hides the mode line of the window.
+      (advice-add #'register-preview :override #'consult-register-window)
 
-   ;; Use Consult to select xref locations with preview
-   (setq xref-show-xrefs-function #'consult-xref
-	 xref-show-definitions-function #'consult-xref)
+      ;; Use Consult to select xref locations with preview
+      (setq xref-show-xrefs-function #'consult-xref
+	    xref-show-definitions-function #'consult-xref)
 
-   ;; Configure other variables and modes in the :config section,
-   ;; after lazily loading the package.
-   :config
+      ;; Configure other variables and modes in the :config section,
+      ;; after lazily loading the package.
+      :config
 
-   ;; Optionally configure preview. The default value
-   ;; is 'any, such that any key triggers the preview.
-   ;; (setq consult-preview-key 'any)
-   ;; (setq consult-preview-key (kbd "M-."))
-   ;; (setq consult-preview-key (list (kbd "<S-down>") (kbd "<S-up>")))
-   ;; For some commands and buffer sources it is useful to configure the
-   ;; :preview-key on a per-command basis using the `consult-customize' macro.
-   (consult-customize
-    consult-theme
-    :preview-key '(:debounce 0.2 any)
-    consult-ripgrep consult-git-grep consult-grep
-    consult-bookmark consult-recent-file consult-xref
-    consult--source-bookmark consult--source-recent-file
-    consult--source-project-recent-file
-    :preview-key (kbd "M-."))
+      ;; Optionally configure preview. The default value
+      ;; is 'any, such that any key triggers the preview.
+      ;; (setq consult-preview-key 'any)
+      ;; (setq consult-preview-key (kbd "M-."))
+      ;; (setq consult-preview-key (list (kbd "<S-down>") (kbd "<S-up>")))
+      ;; For some commands and buffer sources it is useful to configure the
+      ;; :preview-key on a per-command basis using the `consult-customize' macro.
+      (consult-customize
+       consult-theme
+       :preview-key '(:debounce 0.2 any)
+       consult-ripgrep consult-git-grep consult-grep
+       consult-bookmark consult-recent-file consult-xref
+       consult--source-bookmark consult--source-recent-file
+       consult--source-project-recent-file
+       :preview-key (kbd "M-.")))
 
-   ;; Optionally configure the narrowing key.
-   ;; Both < and C-+ work reasonably well.
-   (setq consult-narrow-key "<") ;; (kbd "C-+")
+      ;; Optionally configure the narrowing key.
+      ;; Both arrow key and C-+ work reasonably well.
+      (setq consult-narrow-key "<") ;; (kbd "C-+")
 
-   ;; Optionally make narrowing help available in the minibuffer.
-   ;; You may want to use `embark-prefix-help-command' or which-key instead.
-   ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+      ;; Optionally make narrowing help available in the minibuffer.
+      ;; You may want to use `embark-prefix-help-command' or which-key instead.
+      ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
 
-   ;; By default `consult-project-function' uses `project-root' from project.el.
-   ;; Optionally configure a different project root function.
-   ;; There are multiple reasonable alternatives to chose from.
-	       ;;;; 1. project.el (the default)
-   ;; (setq consult-project-function #'consult--default-project--function)
-	       ;;;; 2. projectile.el (projectile-project-root)
-   ;; (autoload 'projectile-project-root "projectile")
-   ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
-	       ;;;; 3. vc.el (vc-root-dir)
-   ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-	       ;;;; 4. locate-dominating-file
-   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-   )
+      ;; By default `consult-project-function' uses `project-root' from project.el.
+      ;; Optionally configure a different project root function.
+      ;; There are multiple reasonable alternatives to chose from.
+		  ;;;; 1. project.el (the default)
+      ;; (setq consult-project-function #'consult--default-project--function)
+		  ;;;; 2. projectile.el (projectile-project-root)
+      ;; (autoload 'projectile-project-root "projectile")
+      ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
+		  ;;;; 3. vc.el (vc-root-dir)
+      ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+		  ;;;; 4. locate-dominating-file
+      ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
 
 (autoload 'xah-elisp-mode "xah-elisp-mode" "xah emacs lisp major mode." t)
 (xah-elisp-mode)
@@ -193,87 +195,100 @@
 (abbrev-mode 1)
 
 (setq inhibit-startup-screen t)
-  (setq initial-scratch-message nil)
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (tooltip-mode -1)
-  (set-fringe-mode 5)
-  (scroll-bar-mode -1)
-  (fset 'yes-or-no-p 'y-or-n-p)
-  (xclip-mode 1)
-  ;;(defalias 'ivy-switch-buffer 'ibuffer); make ibuffer default
-  ;; (use-package desktop
-  ;;   :defer 2
-  ;;   :config
-  ;;   (setq desktop-path (list my-savefile-dir))
-  ;;   (setq desktop-dirname my-savefile-dir)
-  ;;   (setq desktop-restore-eager 5)
-  ;;   (setq desktop-load-locked-desktop t)
-  ;;   (desktop-save-mode +1))
-  (require 'dired+)
-  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
-
-					  ;  (global-set-key (kbd "C-h-a") 'apropos-command) ;dnw
-
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;theme
-(add-to-list 'load-path "~/.emacs.d/modus-themes")
-
-
-;;; For the built-in themes which cannot use `require':
-;; Add all your customizations prior to loading the themes
-(setq modus-themes-italic-constructs t
-      modus-themes-bold-constructs nil
-      modus-themes-region '(bg-only no-extend))
-
-
-;; Load the theme of your choice:
-(load-theme 'modus-vivendi)
-
-(define-key global-map (kbd "<f5>") #'modus-themes-toggle)
-
-
-
-;;; For packaged versions which must use `require':
-(require 'modus-themes)
-
-;; Add all your customizations prior to loading the themes
-(setq modus-themes-italic-constructs t
-      modus-themes-bold-constructs nil
-      modus-themes-region '(bg-only no-extend))
-
-;; Load the theme files before enabling a theme
-(modus-themes-load-themes)
-
-;; Load the theme of your choice:
-(modus-themes-load-vivendi)
-
-(define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+      (setq initial-scratch-message nil)
 
 
 
 
-  (use-package all-the-icons)
-  (delete-selection-mode t)
-  (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
-  (find-file "~/.emacs.d/george.org")
+;; (defun menu-in-dired ()
+  ;; (add-hook 'dired-mode-hook
+	    ;; #'menu-bar-mode
+	    ;; nil 'local))
+;; 
+;; (add-hook 'dired-mode-hook #'menu-in-dired)
 
-  ;; (define-key xah-fly-command-map (kbd "e") 'previous-line)
-  ;; (define-key xah-fly-command-map (kbd "n") 'next-line)
+    (add-hook 'dired-mode-hook (lambda () (menu-bar-mode 1)))
 
-  (define-key xah-fly-command-map (kbd "C-e") 'eval-last-sexp)
-  (global-set-key (kbd "<f1>") 'check-parens)
+      (menu-bar-mode -1) ;turn on for dired commands
+(tool-bar-mode -1)
+      (tooltip-mode -1)
+      (set-fringe-mode 5)
+      (scroll-bar-mode -1)
+      (fset 'yes-or-no-p 'y-or-n-p)
 
-  (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+      ;;(defalias 'ivy-switch-buffer 'ibuffer); make ibuffer default
+      ;; (use-package desktop
+      ;;   :defer 2
+      ;;   :config
+      ;;   (setq desktop-path (list my-savefile-dir))
+      ;;   (setq desktop-dirname my-savefile-dir)
+      ;;   (setq desktop-restore-eager 5)
+      ;;   (setq desktop-load-locked-desktop t)
+      ;;   (desktop-save-mode +1))
+      (require 'dired+)
+      (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+      (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
-  ;; (defun x-activate-cmd-mode-n-keyboard-quit ()
-  ;; "DOCSTRING"
-  ;; (interactive)
-  ;; (xah-fly-command-mode-activate)
-  ;; (keyboard-quit))
-  ;; (global-set-key "ESC" 'x-activate-cmd-mode-n-keyboard-quit)
+					      ;  (global-set-key (kbd "C-h-a") 'apropos-command) ;dnw
+
+      (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+    ;theme
+    (add-to-list 'load-path "~/.emacs.d/modus-themes")
+
+
+    ;;; For the built-in themes which cannot use `require':
+    ;; Add all your customizations prior to loading the themes
+    (setq modus-themes-italic-constructs t
+	  modus-themes-bold-constructs nil
+	  modus-themes-region '(bg-only no-extend))
+
+
+    ;; Load the theme of your choice:
+    (load-theme 'modus-vivendi)
+
+    (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+
+
+
+    ;;; For packaged versions which must use `require':
+    (require 'modus-themes)
+
+    ;; Add all your customizations prior to loading the themes
+    (setq modus-themes-italic-constructs t
+	  modus-themes-bold-constructs nil
+	  modus-themes-region '(bg-only no-extend))
+
+    ;; Load the theme files before enabling a theme
+    (modus-themes-load-themes)
+
+    ;; Load the theme of your choice:
+    (modus-themes-load-vivendi)
+
+    (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+
+
+
+
+      (use-package all-the-icons)
+      (delete-selection-mode t)
+      (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+      (find-file "~/.emacs.d/george.org")
+
+      ;; (define-key xah-fly-command-map (kbd "e") 'previous-line)
+      ;; (define-key xah-fly-command-map (kbd "n") 'next-line)
+
+      (define-key xah-fly-command-map (kbd "C-e") 'eval-last-sexp)
+      (global-set-key (kbd "<f1>") 'check-parens)
+
+      (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+
+      ;; (defun x-activate-cmd-mode-n-keyboard-quit ()
+      ;; "DOCSTRING"
+      ;; (interactive)
+      ;; (xah-fly-command-mode-activate)
+      ;; (keyboard-quit))
+      ;; (global-set-key "ESC" 'x-activate-cmd-mode-n-keyboard-quit)
 
 ;; Using garbage magic hack.
 (use-package gcmh
@@ -456,3 +471,5 @@
 (define-key dired-mode-map (kbd "DEL") 'dired-up-directory)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
+
+(setq save-abbrevs 'silently)
